@@ -6,7 +6,9 @@
     </li>
   </ul>
 
-  <NuxtLink v-bind:to="{ name: 'taskRegister' }">タスク登録画面に遷移</NuxtLink>
+  <NuxtLink v-bind:to="{ name: 'task-taskRegister' }"
+    >タスク登録画面に遷移</NuxtLink
+  >
 </template>
 <script setup lang="ts">
 import type Task from '~/interfaces/task';
@@ -15,7 +17,7 @@ const greeting = ref('hello');
 const taskList = ref<Array<Task>>([]);
 onMounted(async () => {
   try {
-    const response: Array<Task> = await $fetch('api/GetTasks');
+    const response: Array<Task> = await $fetch('api/getTasks');
     taskList.value = response;
     console.log(taskList);
   } catch (e) {
