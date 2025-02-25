@@ -53,11 +53,13 @@ import { NuxtLink } from '#components';
 import { TaskEnum } from '~/interfaces/taskEnum';
 import dayjs from 'dayjs';
 import options from '~/interfaces/options';
+import type Task from '~/interfaces/task';
 
 const title = ref<string>('');
 const description = ref<string>('');
 const deadline = ref<string>('');
 const status = ref<string>(Object.keys(TaskEnum)[2]);
+let task = ref<Task | null>(null);
 
 const onReset = () => {
   title.value = '';
@@ -87,7 +89,7 @@ const validateDeadline = computed(() => {
 });
 
 const register = async () => {
-  await $fetch('/api/createTask', {
+  const response: any = await $fetch('/api/createTask', {
     method: 'POST',
     body: {
       title: title.value,
@@ -96,5 +98,8 @@ const register = async () => {
       status: status.value,
     },
   });
+  const createdTaskId = response.insertId;
+
+  await navigateTo(`/task/${createdTaskId}`);
 };
 </script>

@@ -46,6 +46,10 @@
     </q-form>
   </div>
   <NuxtLink v-bind:to="{ name: 'index' }">ホームに戻る</NuxtLink>
+  <br />
+  <NuxtLink v-bind:to="{ name: 'task-id', params: { id: taskId } }"
+    >詳細画面に戻る</NuxtLink
+  >
 </template>
 
 <script setup lang="ts">
@@ -121,6 +125,7 @@ const update = async () => {
       status: status.value,
     },
   });
-  await navigateTo(`task/${taskId}`);
+
+  await navigateTo(`/task/${taskId}`);
 };
 </script>
