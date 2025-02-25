@@ -10,6 +10,8 @@
   <template v-else>
     <p>タスクが見つかりませんでした</p>
   </template>
+
+  <NuxtLink v-bind:to="{ name: 'task-update-id' }">タスクを更新する</NuxtLink>
 </template>
 <script lang="ts" setup>
 import { ref } from 'vue';
@@ -18,7 +20,6 @@ import type Task from '~/interfaces/task';
 
 const route = useRoute();
 const id = route.params.id;
-const tmp = ref<number>(0);
 let task = ref<Task | null>(null);
 
 onMounted(async () => {
