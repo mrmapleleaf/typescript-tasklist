@@ -2,7 +2,9 @@
   <h1>{{ greeting }}</h1>
   <ul>
     <li v-for="task in taskList" :key="task.id">
-      {{ task.title }}
+      <NuxtLink v-bind:to="{ name: 'task-id', params: { id: task.id } }">{{
+        task.title
+      }}</NuxtLink>
     </li>
   </ul>
 
