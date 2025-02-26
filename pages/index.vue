@@ -1,5 +1,5 @@
 <template>
-  <h1>{{ greeting }}</h1>
+  <h1>タスク一覧</h1>
   <ul>
     <li v-for="task in taskList" :key="task.id">
       <NuxtLink v-bind:to="{ name: 'task-id', params: { id: task.id } }">{{
@@ -15,7 +15,6 @@
 <script setup lang="ts">
 import type Task from '~/interfaces/task';
 
-const greeting = ref('hello');
 const taskList = ref<Array<Task>>([]);
 onMounted(async () => {
   try {

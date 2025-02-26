@@ -11,6 +11,8 @@
     <p>タスクが見つかりませんでした</p>
   </template>
 
+  <button @click="deleteTask()">タスクを削除する</button>
+  <br />
   <NuxtLink v-bind:to="{ name: 'task-update-id' }">タスクを更新する</NuxtLink>
   <br />
   <NuxtLink v-bind:to="{ name: 'index' }">ホームに戻る</NuxtLink>
@@ -64,5 +66,23 @@ const convertDeadline = (deadline: string) => {
 
 const convertStatus = (status: keyof typeof TaskEnum): string => {
   return TaskEnum[status];
+};
+
+const deleteTask = async () => {
+  const deleteFlg = confirm('削除してもよろしいですか？');
+
+  if (deleteFlg) {
+    try {
+      await $fetch('/api/deleteTask', {
+        method: 'DELETE',
+        params: { id: id },
+      });
+    } catch (e) {
+      console.error(e);
+    }
+    await navigateTo('/');
+  } else {
+    return;
+  }
 };
 </script>
